@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 1000px;
+        height: 250px;
+        border: 2px solid;
+        margin-top: 50px;
+        margin-left: 150px;
+    }
+</style>
+<body>
+    <h1>Random Color Gernator</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <div class="box"> </div>
+</body>
+<script>
+    let randomColor = ()=>{
+      let hexa = '0123456789ABCDEF';
+      let color = '#'
+      for (let i = 0; i < 6; i++) {
+            color += hexa[Math.floor(Math.random()*16)];   
+      }
+      return color
+    }
+    console.log(randomColor());
+    
+    let btn1 = document.querySelector('#start')
+    let btn2 = document.querySelector('#stop')
+    let box =  document.querySelector('.box')
+    let start ;
+    btn1.addEventListener('click',()=>{
+      start =   setInterval(()=>{
+        
+        box.style.backgroundColor = randomColor();
+      },1000)
+   
+    });
+    btn2.addEventListener('click',()=>{
+        clearInterval(start)
+      })
+</script>
+</html>
