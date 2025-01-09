@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch </title>
+</head>
+<style>
+    body{
+        width: 100%;
+        height: 100vh;
+        color: aliceblue;
+        background: #212121;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .container{
+        width: 200px;
+        border: 1px solid rgb(34, 32, 32);
+        padding: 40px;
+        border-radius: 40px;
+        box-shadow: 10px 2px 2px rgb(26, 24, 24),-10px 2px 2px rgb(26, 24, 24);
+        text-align: center;
+    }
+
+    .clock{
+       
+    }
+    button{
+        margin: 2px;
+        border: none;
+        padding: 11px;
+        border-radius: 20px;
+        background-color: rgb(226, 60, 0);
+        color: wheat;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    h1{
+        text-shadow: 2px 1px 1px rgba(255, 255, 255, 0.39);
+    }
+    h2{
+        font-size: 39px;
+      
+    }
+</style>
+<body>
+   <div class="container">
+        <h1>Stop Watch</h1>
+        <div class="clock"> <h2>00:00</h2></div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+   </div>
+</body>
+<script>
+        let clock = document.querySelector('.clock h2');
+        let startBtn = document.querySelector('#start');
+        let stopBtn = document.querySelector('#stop');
+        let resetBtn = document.querySelector('#reset');
+        
+        let interval;
+        let seconds = 0;
+
+        
+        function formatTime(sec) {
+            let minutes = Math.floor(sec / 60);
+            let seconds = sec % 60;
+            //it converts the mintues to string and add zero to left similary for secounds 
+            let time = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` 
+            return time;
+        }
+
+     
+        startBtn.addEventListener('click', () => {
+            if (!interval) { 
+                interval = setInterval(() => {
+                    seconds++;
+                    clock.innerText = formatTime(seconds);
+                }, 1000);
+            }
+        });
+
+      
+        stopBtn.addEventListener('click', () => {
+            clearInterval(interval);
+            interval = null; // Reset interval so Start can work again
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(interval);
+            interval = null;
+            seconds = 0;
+            clock.innerText = "00:00"; // Reset display
+        });
+
+</script>
+</html>
